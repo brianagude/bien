@@ -9,18 +9,44 @@
 
   <%end%>
   <p>
-    <%= f.label :Restaurant %>
+    <%= f.label :Title %>
     <%= f.text_field :title %>
   </p>
 
   <p>
-    <%= f.label :City%>
+    <%= f.label :Restaurant %>
+    <%= f.text_field :restaurant %>
+  </p>
+
+  <p>
+    <%= f.label :address %>
+    <%= f.text_field :address %>
+  </p>
+
+  <p>
+    <%= f.label :body%>
     <%= f.text_area :body%>
   </p>
 
   <p>
+    <%= f.label :cuisine%>
+    <%= f.text_area :cuisine%>
+  </p>
+
+  <p>
+    <%= f.label :price%>
+    <%= f.number_field :price%>
+  </p>
+
+
+  <p>
     <%= f.label :Rating %>
     <%= f.number_field :score %>
+  </p>
+
+  <p>
+    <%= f.label :ambiance %>
+    <%= f.text_field :ambiance %>
   </p>
 
   <%= f.submit "Sumbit Review"%>

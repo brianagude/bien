@@ -1,16 +1,40 @@
-<h1><%= @review.title %></h1>
-
-<div class="score">
-    <%= @review.score %> /10
-</div>
+    <% content_for :page_title, @review.title %>
 
 
-<div class="body">
-  <%= simple_format @review.body %>
-</div>
 
 
-<div class="actions">
-  <%= link_to "Edit this review", edit_review_path(@review)%>
-  <%= link_to "Delete this review", review_path(@review), method: :delete, data: {confirm: "Are you sure??"} %>
-</div>
+    <h1><%= @review.title %></h1>
+    <h2><%= @review.restaurant %></h2>
+
+
+    <div class="score">
+        <%= @review.score %> /10
+    </div>
+
+    <% if @review.ambiance.present? %>
+      <div class="ambiance">
+        Ambiance: <%= @review.ambiance %>
+      </div>
+    <% end %>
+
+    <% if @review.price.present? %>
+      <div class="price">
+        Price: <%= @review.price %>
+      </div>
+    <% end %>
+
+    <% if @review.cuisine.present? %>
+      <div class="cuisine">
+        Cuisine: <%= @review.cuisine %>
+      </div>
+    <% end %>
+
+    <div class="body">
+      <%= simple_format @review.body %>
+    </div>
+
+
+    <div class="actions">
+      <%= link_to "Edit this review", edit_review_path(@review)%>
+      <%= link_to "Delete this review", review_path(@review), method: :delete, data: {confirm: "Are you sure??"} %>
+    </div>
