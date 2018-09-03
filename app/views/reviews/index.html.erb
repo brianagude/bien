@@ -1,19 +1,19 @@
 <% content_for :page_title, "Homepage" %>
 
 <nav class="filters">
-  <%= link_to "All Restaurants", root_path %>
+  <%= active_link_to "All Restaurants", root_path, active: {price: nil, cuisine: nil, location: nil} %>
 
   <div>
-    <%= link_to "$", root_path(price:1, cuisine: @cuisine, location: @location) %>
-    <%= link_to "$$", root_path(price:2, cuisine: @cuisine, location: @location) %>
-    <%= link_to "$$$", root_path(price:3, cuisine: @cuisine, location: @location) %>
-    <%= link_to "$$$$", root_path(price:4, cuisine: @cuisine, location: @location) %>
+    <%= active_link_to "$", root_path(price:1, cuisine: @cuisine, location: @location), active: {price: 1} %>
+    <%= active_link_to "$$", root_path(price:2, cuisine: @cuisine, location: @location), active: {price: 2} %>
+    <%= active_link_to "$$$", root_path(price:3, cuisine: @cuisine, location: @location), active: {price: 3} %>
+    <%= active_link_to "$$$$", root_path(price:4, cuisine: @cuisine, location: @location), active: {price: 4} %>
   </div>
 
   <div>
-    <%= link_to "Chicken", root_path(cuisine: "Chicken", price: @price, location: @location)%>
-    <%= link_to "Indian", root_path(cuisine: "Indian", price: @price, location: @location)%>
-    <%= link_to "American", root_path(cuisine: "American", price: @price, location: @location)%>
+    <%= active_link_to "Chicken", root_path(cuisine: "Chicken", price: @price, location: @location), active: {cuisine: "Chicken"} %>
+    <%= active_link_to "Indian", root_path(cuisine: "Indian", price: @price, location: @location), active: {cuisine: "Indian"}%>
+    <%= active_link_to "American", root_path(cuisine: "American", price: @price, location: @location), active: {cuisine: "American"}%>
   </div>
 
   <form action="/">
@@ -28,10 +28,24 @@
 
 
 
-<% @reviews.each do |review|%>
+
+
+
+
+
+<% @reviews.each do |review| %>
 
   <div class="review">
-    <%=link_to review.title, review_path(review) %>
+    <%=link_to review_path(review) do %>
+
+    <h2><%= review.title %></h2>
+    <p>
+      <%= review.cuisine %> -
+      <%= pluralize review.comments.count, "comment" %> 
+    </p>
+
+
+    <% end %>
   </div>
 
 <% end %>

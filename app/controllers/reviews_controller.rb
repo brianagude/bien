@@ -17,7 +17,7 @@ class ReviewsController < ApplicationController
 
     #filter by Cuisine
     if @cuisine.present?
-      @reviews = @reviews.where(cuising: @cuisine)
+      @reviews = @reviews.where(Cuisine: @cuisine)
     end
 
     #search near the location
