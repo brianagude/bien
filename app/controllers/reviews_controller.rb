@@ -1,5 +1,8 @@
 class ReviewsController < ApplicationController
 
+#check if logged in
+before_action :check_login, except: [:index, :show]
+
   def index
     # this is our list page for our reviews
 
@@ -41,6 +44,9 @@ class ReviewsController < ApplicationController
     #the : is in front because they're called symbols => variables that stay the same
     @review = Review.new(form_params)
 
+    #then associate it with a user
+    @review.user = @current_user
+
     #check if the model can be saved
     #if yes, go to the home page
     #if no, show the new form
@@ -64,29 +70,58 @@ class ReviewsController < ApplicationController
   def destroy
     #find the individual review
     @review = Review.find(params[:id])
-    #destroy
-    @review.destroy
+
+
+
+    #if they are the user, they can destroy
+    if @review.user == @current_user
+      @review.destroy
+    end
+
     #redirect to the home page
     redirect_to root_path
   end
 
+
+
+
   def edit
     #find the individual review to edit
     @review = Review.find(params[:id])
+
+
+
+
+    # if thye're not the user, redirect to home page
+    if @review.user != @current_user
+      redirect_to root_path
+    end
   end
+
+
+
+
+
 
   def update
     #find the individual #review
     @review = Review.find(params[:id])
 
-    #update with the new info from the form
-    if @review.update(form_params)
 
-      #redirect somewhere new
-      redirect_to review_path(@review)
+    if @review.user !=@current_user
+      redirect_to root_path
     else
-      render "edit"
+      #update with the new info from the form
+      if @review.update(form_params)
+
+        #redirect somewhere new
+        redirect_to review_path(@review)
+      else
+        render "edit"
+      end
     end
+    
+
   end
 
   def form_params

@@ -20,7 +20,19 @@
       </nav>
 
       <nav>
-        <%= link_to "Add a Review", new_review_path %>
+
+        <% if is_logged_in? %>
+          <%= @current_user.username %>
+          <%= link_to "Add a Review", new_review_path %>
+          <%= link_to "Log Out", session_path, method: :delete %>
+
+        <% else %>
+
+          <%= link_to "Sign Up", new_user_path %>
+          <%= link_to "Log In", new_session_path %>
+
+        <% end %>
+
       </nav>
 
     </header>
