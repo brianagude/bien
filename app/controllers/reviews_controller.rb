@@ -20,16 +20,13 @@ before_action :check_login, except: [:index, :show]
 
     #filter by Cuisine
     if @cuisine.present?
-      @reviews = @reviews.where(Cuisine: @cuisine)
+      @reviews = @reviews.where("lower(cuisine) = lower(?)", @cuisine)
     end
 
     #search near the location
     if @location.present?
       @reviews = @reviews.near(@location)
     end
-
-
-
   end
 
 
@@ -127,7 +124,7 @@ before_action :check_login, except: [:index, :show]
   end
 
   def form_params
-    params.require(:review).permit(:title, :body, :restaurant, :score, :ambiance, :price, :address, :photo)
+    params.require(:review).permit(:title, :body, :restaurant, :score, :ambiance, :price, :address, :photo, :cuisine)
   end
 
 
