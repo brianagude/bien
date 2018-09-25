@@ -53,6 +53,10 @@ gem 'active_link_to'
 #profanity filter
 gem "profanity_filter"
 
+#to upload files
+gem 'carrierwave', '~> 1.0'
+gem 'mini_magick'
+
 
 
 

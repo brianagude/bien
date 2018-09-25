@@ -95,6 +95,8 @@ before_action :check_login, except: [:index, :show]
     # if thye're not the user, redirect to home page
     if @review.user != @current_user
       redirect_to root_path
+    elsif @review.created_at < 1.hour.ago
+      redirect_to review_path(@review)
     end
   end
 
@@ -120,12 +122,12 @@ before_action :check_login, except: [:index, :show]
         render "edit"
       end
     end
-    
+
 
   end
 
   def form_params
-    params.require(:review).permit(:title, :body, :restaurant, :score, :ambiance, :price, :address)
+    params.require(:review).permit(:title, :body, :restaurant, :score, :ambiance, :price, :address, :photo)
   end
 
 
