@@ -124,7 +124,7 @@ before_action :check_login, except: [:index, :show]
   end
 
   def form_params
-    params.require(:review).permit(:title, :body, :restaurant, :score, :ambiance, :price, :address, :photo, :cuisine)
+    params.require(:review).permit(:title, :body, :restaurant, :score, :ambiance, :price, :address, :photo, :cuisine,)
   end
 
 
